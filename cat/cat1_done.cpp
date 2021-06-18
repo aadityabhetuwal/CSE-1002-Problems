@@ -32,9 +32,10 @@ int main(){
     
     int _min, _max;
     
-    std::cout << &arr << ' ' << (arr + 0) << '\n';
-
-    // get_min_max(arr, n, &_min, &_max);
+    get_min_max(arr, n, &_min, &_max);
     
-    // printf("%d\n%d", _min, _max);
+    printf("%d\n%d", _min, _max);
+
+    free(arr);
+    return 0;
 }
