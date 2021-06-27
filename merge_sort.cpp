@@ -14,9 +14,9 @@ using namespace std;
 
 void print_arr(vector<int> arr, int n){
     for(int i = 0; i < n; i++){
-        cout << arr[i] << ' ';
+        cout << arr[i] << '\n';
     }
-    cout << '\n';
+
 }
 
 vector<int> _merge(vector<int> a,vector<int> b){
