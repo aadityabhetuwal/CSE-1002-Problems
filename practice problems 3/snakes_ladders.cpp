@@ -50,13 +50,10 @@ int find_New_Pos(board &b,snakes &snake_Det,ladders &ladder_Det,position &cur_Po
 void read_Values(board &b,snakes &snake_Det,ladders &ladder_Det,position &cur_Pos,rolls &r){
 
     cin >> b.row >> b.col;
-
     cin >> snake_Det.num;
-
 
     for(int i = 0; i < snake_Det.num; i++){
         cin >> snake_Det.st_Grid[i] >> snake_Det.end_Grid[i];
-
     }
 
     cin >> ladder_Det.num;
@@ -72,13 +69,31 @@ void read_Values(board &b,snakes &snake_Det,ladders &ladder_Det,position &cur_Po
     for(int i = 0; i < r.num; i++){
         cin >> r.roll[i];
     }
-
-    cout << "finished with input\n";
+	return;
 }
 
-int find_New_Pos(board &b,snakes &snake_Det,ladders &ladder_Det,position &cur_Pos, rolls &r){
-    return 0;
 
+int find_New_Pos(board &b,snakes &snake_Det,ladders &ladder_Det,position &cur_Pos, rolls &r){
+
+	int ini_grid = (cur_Pos.row - 1) * b.col + cur_Pos.col;
+
+	for(int i = 0; i < r.num; i++){
+		ini_grid += r.roll[i];
+
+		for(int j = 0; j < snake_Det.num; j++){
+			if(snake_Det.st_Grid[i] == ini_grid){
+				ini_grid = snake_Det.end_Grid[i];
+			}
+		}
+
+		for(int j = 0; j < ladder_Det.num; j++){
+			if(ladder_Det.st_Grid[i] == ini_grid){
+				ini_grid = ladder_Det.end_Grid[i];
+			}
+		}
+	}
+
+	return ini_grid;
 };
 
 int main()
@@ -90,6 +105,6 @@ int main()
 	snakes snake_Det;
 	ladders ladder_Det;	
 	read_Values(b,snake_Det,ladder_Det,cur_Pos,r);
-	final_Grid = find_New_Pos(b,snake_Det,ladder_Det,cur_Pos,r);
+	final_Grid = find_New_Pos(b, snake_Det, ladder_Det, cur_Pos, r);
 	cout << final_Grid;
 }
